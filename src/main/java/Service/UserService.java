@@ -1,19 +1,26 @@
 package Service;
 
-public class UserService implements iUserService{
-    @Override
-    public void signUp() {
+import DAO.UserDAO;
+import Model.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserService implements iUserService{
+    List<User> users = new ArrayList<>();
+    UserDAO userDAO = new UserDAO();
+    @Override
+    public void signUp(String email, String  password, String name, String dob) {
+        userDAO.signUp(email, password, name, dob);
     }
 
     @Override
-    public void signIn() {
-
+    public boolean signIn(String email, String password) {
+        return userDAO.signIn(email, password);
     }
 
     @Override
     public void signOut() {
-
     }
 
     @Override

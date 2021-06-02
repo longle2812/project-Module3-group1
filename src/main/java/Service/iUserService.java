@@ -1,8 +1,8 @@
 package Service;
 
 public interface iUserService {
-    void signUp();
-    void signIn();
+    void signUp(String email, String password, String name, String dob);
+    boolean signIn(String email, String password);
     void signOut();
     void createNewBook();
     void createNewPosition();
