@@ -10,8 +10,9 @@ public class UserService implements iUserService{
     List<User> users = new ArrayList<>();
     UserDAO userDAO = new UserDAO();
     @Override
-    public void signUp(String email, String  password, String name, String dob) {
-        userDAO.signUp(email, password, name, dob);
+    public boolean signUp(String email, String  password, String name, String dob, String phoneNumber) {
+        User user = new User(email, password, name, dob, phoneNumber);
+        return userDAO.createNew(user);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package Service;
 
 public interface iUserService {
-    void signUp(String email, String password, String name, String dob);
+    boolean signUp(String email, String password, String name, String dob, String phoneNumber);
     boolean signIn(String email, String password);
     void signOut();
     void createNewBook();
