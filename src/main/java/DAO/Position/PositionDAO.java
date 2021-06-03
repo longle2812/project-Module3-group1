@@ -1,4 +1,4 @@
-package DAO;
+package DAO.Position;
 
 public class PositionDAO {
 }
