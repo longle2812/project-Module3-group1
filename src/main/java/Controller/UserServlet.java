@@ -1,6 +1,7 @@
 package Controller;
 
-import Service.UserService;
+import Model.User;
+import Service.User.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,6 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "UserServlet", value = "/userServlet")
 public class UserServlet extends HttpServlet {
     UserService userService = new UserService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -53,8 +55,7 @@ public class UserServlet extends HttpServlet {
         if (isSuccess) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("userProfile.jsp");
             requestDispatcher.forward(request, response);
-        }
-        else {
+        } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -66,7 +67,22 @@ public class UserServlet extends HttpServlet {
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String dob = request.getParameter("dob");
-        this.userService.signUp(email, password, name, dob);
+        String phoneNumber = request.getParameter("phoneNumber");
+        String emailRegex = "^(.*?)+@(.*?)(\\.(.*?))+$";
+        String passwordRegex = ".{6,}";
+        User user = new User(email, password, name, dob, phoneNumber);
+        if (!email.matches(emailRegex)) {
+            request.setAttribute("emailErr", true);
+        }
+        if (!password.matches(passwordRegex)) {
+            request.setAttribute("passErr", true);
+        }
+        if (email.matches(emailRegex) && password.matches(passwordRegex)){
+            if (this.userService.createNew(user)) {
+                request.setAttribute("message", "Success");
+            }
+            else request.setAttribute("message", "Error");
+        }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("UserAccount/signUp.jsp");
         requestDispatcher.forward(request, response);
     }

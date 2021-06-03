@@ -1,5 +1,6 @@
-package DAO;
+package DAO.User;
 
+import DAO.SQLConnection;
 import Model.User;
 
 import java.sql.Connection;
@@ -24,7 +25,7 @@ public class UserDAO implements iUserDAO {
             preparedStatement.setString(5, user.getPhoneNumber());
             rowInserted = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            return rowInserted!=0;
         }
         return rowInserted!=0;
     }

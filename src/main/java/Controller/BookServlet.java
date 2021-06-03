@@ -1,13 +1,13 @@
 package Controller;
 
-import Service.UserService;
+import Service.User.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "BookServlet", value = "/bookservlet")
+@WebServlet(name = "BookServlet", value = "/bookServlet")
 public class BookServlet extends HttpServlet {
     UserService userService = new UserService();
     @Override

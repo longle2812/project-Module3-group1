@@ -1,23 +1,9 @@
-package Service;
+package Service.User;
 
-public interface iUserService {
-    boolean signUp(String email, String password, String name, String dob, String phoneNumber);
+import Model.User;
+import Service.iGeneralService;
+
+public interface iUserService extends iGeneralService<User> {
+    boolean createNew(User user);
     boolean signIn(String email, String password);
-    void signOut();
-    void createNewBook();
-    void createNewPosition();
-    void changePosition();
-    void deletePosition();
-    void deleteBook();
-    void showBookList();
-    void updateBookDetail();
-    void searchBook();
-    void changePassword();
-    void updateUserInfo();
-    void showListByName();
-    void showBookDetail();
-    void showPositionDetail();
-    void showListByStatus();
-    void showListByPosition();
-
 }

@@ -1,18 +1,33 @@
-package Service;
+package Service.User;
 
-import DAO.UserDAO;
+import DAO.User.UserDAO;
 import Model.User;
+import Service.User.iUserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService implements iUserService{
+public class UserService implements iUserService {
     List<User> users = new ArrayList<>();
     UserDAO userDAO = new UserDAO();
     @Override
-    public boolean signUp(String email, String  password, String name, String dob, String phoneNumber) {
-        User user = new User(email, password, name, dob, phoneNumber);
+    public boolean createNew(User user) {
         return userDAO.createNew(user);
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public void findAll() {
+
     }
 
     @Override
@@ -20,82 +35,5 @@ public class UserService implements iUserService{
         return userDAO.signIn(email, password);
     }
 
-    @Override
-    public void signOut() {
-    }
 
-    @Override
-    public void createNewBook() {
-
-    }
-
-    @Override
-    public void createNewPosition() {
-
-    }
-
-    @Override
-    public void changePosition() {
-
-    }
-
-    @Override
-    public void deletePosition() {
-
-    }
-
-    @Override
-    public void deleteBook() {
-
-    }
-
-    @Override
-    public void showBookList() {
-
-    }
-
-    @Override
-    public void updateBookDetail() {
-
-    }
-
-    @Override
-    public void searchBook() {
-
-    }
-
-    @Override
-    public void changePassword() {
-
-    }
-
-    @Override
-    public void updateUserInfo() {
-
-    }
-
-    @Override
-    public void showListByName() {
-
-    }
-
-    @Override
-    public void showBookDetail() {
-
-    }
-
-    @Override
-    public void showPositionDetail() {
-
-    }
-
-    @Override
-    public void showListByStatus() {
-
-    }
-
-    @Override
-    public void showListByPosition() {
-
-    }
 }

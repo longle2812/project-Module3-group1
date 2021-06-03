@@ -1,4 +1,8 @@
-package DAO;
+package DAO.Book;
 
-public interface iBookDAO {
+import DAO.iGeneralDAO;
+import Model.Book;
+
+public interface iBookDAO extends iGeneralDAO<Book> {
+
 }
