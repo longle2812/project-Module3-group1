@@ -16,19 +16,20 @@ public class UserService implements iUserService {
     }
 
     @Override
-    public void update() {
-
+    public boolean update(int id, User user) {
+        return false;
     }
 
     @Override
-    public void delete() {
-
+    public boolean delete(int id) {
+        return false;
     }
 
     @Override
-    public void findAll() {
-
+    public List<User> findAll() {
+        return null;
     }
+
 
     @Override
     public boolean signIn(String email, String password) {

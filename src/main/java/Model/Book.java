@@ -1,23 +1,33 @@
 package Model;
 
 public class Book {
+    private int id;
     private String name;
     private String description;
     private String imageURL;
     private String status;
-    private String type;
+    private int category_id;
     private String publisher;
     private int position;
 
     public Book() {
     }
 
-    public Book(String name, String description, String imageURL, String status, String type, String publisher, int position) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Book(int id, String name, String description, String imageURL, String status, int category_id, String publisher, int position) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.imageURL = imageURL;
         this.status = status;
-        this.type = type;
+        this.category_id = category_id;
         this.publisher = publisher;
         this.position = position;
     }
@@ -54,12 +64,12 @@ public class Book {
         this.status = status;
     }
 
-    public String getType() {
-        return type;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     public String getPublisher() {

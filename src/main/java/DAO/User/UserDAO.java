@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDAO implements iUserDAO {
 
@@ -28,6 +29,21 @@ public class UserDAO implements iUserDAO {
             return rowInserted!=0;
         }
         return rowInserted!=0;
+    }
+
+    @Override
+    public boolean update(int id, User user) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return null;
     }
 
     public boolean signIn(String email, String password) {
