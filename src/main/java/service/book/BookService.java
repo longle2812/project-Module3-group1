@@ -16,20 +16,32 @@ public class BookService implements IBookService {
 
     @Override
     public boolean update(int id, Book book) {
-        return false;
+        return bookDAO.update(id,book);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return bookDAO.delete(id);
     }
 
     @Override
     public List<Book> findAll() {
         return bookDAO.findAll();
     }
+
+    @Override
     public Map<Integer, String> getCategoryName() {
         return bookDAO.getCategoryName();
+    }
+
+    @Override
+    public Book findByID(int id) {
+        return bookDAO.findByID(id);
+    }
+
+    @Override
+    public List<Book> searchByName(String name) {
+        return bookDAO.searchByName(name);
     }
 
     public List<Book> findBookById(int userID, int shelfID){
