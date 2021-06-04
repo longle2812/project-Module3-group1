@@ -25,10 +25,20 @@ public class UserServlet extends HttpServlet {
             case "changePassword":
                 changePasswordForm(request, response);
                 break;
+            case "userMenu":
+                showUserMenu(request, response);
             default:
-                showMainMenu(request, response);
+                showLogin(request, response);
                 break;
         }
+    }
+
+    private void showUserMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        User user = this.userService.findUserByEmail(email);
+        request.setAttribute("user", user);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/userProfile.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     private void changePasswordForm(HttpServletRequest request, HttpServletResponse response) {
@@ -138,7 +148,7 @@ public class UserServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    private void showMainMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }

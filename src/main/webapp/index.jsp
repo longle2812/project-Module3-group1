@@ -17,32 +17,55 @@
 
 <h3> WELCOME</h3>
 <h4> Login Panel</h4>
-<div>
-    <form action="/userServlet?action=signIn" method="post">
-        <table>
-            <tr>
-                <td>Username</td>
-                <td><input type="text" name="email"></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-            <tr>
-                <td>
-                    <button><a href="/userServlet?action=signUp" class="button"> Create new account</a></button>
-                </td>
-                <td><input type="submit" value="Login"></td>
+<%--<div>--%>
+<%--    <form action="/userServlet?action=signIn" method="post">--%>
+<%--        <table>--%>
+<%--            <tr>--%>
+<%--                <td>Username</td>--%>
+<%--                <td><input type="text" name="email"></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>Password</td>--%>
+<%--                <td><input type="password" name="password"></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>--%>
+<%--                    <button><a href="/userServlet?action=signUp" class="button"> Create new account</a></button>--%>
+<%--                </td>--%>
+<%--                <td><input type="submit" value="Login"></td>--%>
 
-            </tr>
-            <c:if test="${message != null}">
-                <tr>
-                    <td style="color: red">Invalid email or password</td>
-                </tr>
-            </c:if>
-        </table>
+<%--            </tr>--%>
+<%--            <c:if test="${message != null}">--%>
+<%--                <tr>--%>
+<%--                    <td style="color: red">Invalid email or password</td>--%>
+<%--                </tr>--%>
+<%--            </c:if>--%>
+<%--        </table>--%>
+<%--    </form>--%>
+<%--</div>--%>
+<%--New Menu--%>
+    <form class="px-4 py-3" action="/userServlet?action=signIn" method="post">
+        <div class="mb-3">
+            <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+            <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <label class="form-check-label" for="dropdownCheck">
+                    Remember me
+                </label>
+            </div>
+        </div>
+<%--        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign In</a>--%>
+        <button type="submit" class="btn btn-primary" >Sign in</button>
     </form>
-</div>
-
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">New around here? Sign up</a>
+    <a class="dropdown-item" href="#">Forgot password?</a>
 </body>
 </html>
