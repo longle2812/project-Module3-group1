@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,14 @@ public class BookServlet extends HttpServlet {
                 showCreateForm(request, response);
                 break;
             }
+            case "edit":{
+                showEditForm(request, response);
+                break;
+            }
+            case "delete":{
+                deleteUser(request, response);
+                break;
+            }
             default: {
                 showBookList(request, response);
                 break;
@@ -32,8 +41,50 @@ public class BookServlet extends HttpServlet {
         }
     }
 
+    private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("nameSearch");
+        List<Book> bookList = bookService.searchByName(name);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
+        request.setAttribute("books",bookList);
+        requestDispatcher.forward(request,response);
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        RequestDispatcher requestDispatcher;
+        if(!bookService.delete(id)){
+            requestDispatcher =request.getRequestDispatcher("error-404.jsp");
+        }else{
+            List<Book> bookList = bookService.findAll();
+            requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
+            request.setAttribute("books", bookList);
+        }
+        requestDispatcher.forward(request,response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id =  Integer.parseInt(request.getParameter("id"));
+        Map<Integer, String> categoryList = bookService.getCategoryName();
+        Book book = bookService.findByID(id);
+        RequestDispatcher requestDispatcher;
+        if(book==null){
+            requestDispatcher = request.getRequestDispatcher("error-404.jsp");
+        }else{
+            requestDispatcher = request.getRequestDispatcher("/book/edit.jsp");
+            request.setAttribute("book", book);
+            request.setAttribute("categories", categoryList);
+        }
+        requestDispatcher.forward(request,response);
+    }
+
     private void showBookList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> bookList = bookService.findAll();
+        String q = request.getParameter("q");
+        List<Book> bookList;
+        if(q==null || q.equals("")){
+            bookList = bookService.findAll();
+        }else{
+            bookList = bookService.searchByName(q);
+        }
         Map<Integer, String> categoryList = bookService.getCategoryName();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
         request.setAttribute("books", bookList);
@@ -59,7 +110,31 @@ public class BookServlet extends HttpServlet {
                 createNewBook(request,response);
                 break;
             }
+            case "edit":{
+                editBook(request, response);
+                break;
+            }
+
         }
+    }
+
+    private void editBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String imgURL = request.getParameter("imgURL");
+        String status = request.getParameter("status");
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        String publisher = request.getParameter("publisher");
+        Book book = new Book(name,description,imgURL,status,category_id,publisher);
+        RequestDispatcher requestDispatcher;
+        if(!bookService.update(id, book)){
+            requestDispatcher = request.getRequestDispatcher("error-404.jsp");
+        }else{
+            request.setAttribute("message", "Book was updated");
+            requestDispatcher = request.getRequestDispatcher("/book/edit.jsp");
+        }
+        requestDispatcher.forward(request, response);
     }
 
     private void createNewBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
