@@ -65,7 +65,7 @@
         <button type="submit" class="btn btn-primary" >Sign in</button>
     </form>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">New around here? Sign up</a>
+    <a class="dropdown-item" href="/userServlet?action=signUp">New around here? Sign up</a>
     <a class="dropdown-item" href="#">Forgot password?</a>
 </body>
 </html>
