@@ -104,10 +104,11 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         boolean isSuccess = this.userService.signIn(email, password);
-
+        HttpSession session = request.getSession();
         if (isSuccess) {
             User user = this.userService.findUserByEmail(email);
             request.setAttribute("user", user);
+            session.setAttribute("userID",user.getId());
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/userProfile.jsp");
             requestDispatcher.forward(request, response);
         } else {

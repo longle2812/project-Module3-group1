@@ -18,6 +18,10 @@ public class BookDAO implements IBookDAO {
     public static final String SELECT_ALL_CATEGORY = "select * from category;";
     public static final String INSERT_NEW_BOOK = "insert into book (name, description, imgURL, status,category_id,  publisher) values(?,?,?,?,?,?)";
     public static final String SELECT_BOOK_BY_ID = "select * from book where id = ?";
+    public static final String SELECT_BOOK_BY_USERID_SHELFID = "select * from book \n" +
+            "         join changelog c on book.id = c.bookId\n" +
+            "         join shelf s on c.shelfId = s.id\n" +
+            "where shelfId = ? & c.userId = ?";
 
     @Override
     public boolean createNew(Book book) {
@@ -94,7 +98,7 @@ public class BookDAO implements IBookDAO {
         Book book = null;
         Connection connection = SQLConnection.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_USERID_SHELFID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -104,5 +108,30 @@ public class BookDAO implements IBookDAO {
             e.printStackTrace();
         }
         return book;
+    }
+
+    public List<Book> findBookByUserID(int userID, int shelfID) {
+        List<Book> bookList = new ArrayList<>();
+        Connection connection = SQLConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_USERID_SHELFID);
+            preparedStatement.setInt(1, shelfID);
+            preparedStatement.setInt(2, userID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("book.id");
+                String name = resultSet.getString("book.name");
+                String description = resultSet.getString("book.description");
+                String imgURL = resultSet.getString("imgURL");
+                String status = resultSet.getString("status");
+                int categoryId = resultSet.getInt("category_id");
+                String publisher = resultSet.getString("publisher");
+                Book book = new Book(id, name, description, imgURL, status, categoryId, publisher);
+                bookList.add(book);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return bookList;
     }
 }

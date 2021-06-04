@@ -10,4 +10,6 @@ public interface IUserDAO extends IGeneralDAO<User> {
 
     boolean changePassword(User user, String newPassword);
     boolean signIn(String email, String password);
+
+    User findUserById(int id);
 }

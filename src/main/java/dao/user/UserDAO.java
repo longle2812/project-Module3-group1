@@ -70,13 +70,14 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String email1 = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 String name = resultSet.getString("name");
                 String dob = resultSet.getString("dob");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String avatarURL = resultSet.getString("avatarURL");
-                User user = new User(email1, password, name, dob, phoneNumber, avatarURL);
+                User user = new User(id,email1, password, name, dob, phoneNumber, avatarURL);
                 return user;
             }
         } catch (SQLException throwables) {
@@ -99,5 +100,29 @@ public class UserDAO implements IUserDAO {
             throwables.printStackTrace();
         }
         return rowUpdated != 0;
+    }
+
+    @Override
+    public User findUserById(int id) {
+        Connection connection = SQLConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id1 = resultSet.getInt("id");
+                String email1 = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String name = resultSet.getString("name");
+                String dob = resultSet.getString("dob");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String avatarURL = resultSet.getString("avatarURL");
+                User user = new User(id1, email1, password, name, dob, phoneNumber, avatarURL);
+                return user;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

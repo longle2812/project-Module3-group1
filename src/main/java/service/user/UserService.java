@@ -43,4 +43,9 @@ public class UserService implements IUserService {
     public boolean changePassword(User user, String newPassword) {
         return userDAO.changePassword(user, newPassword);
     }
+
+    @Override
+    public User findUserById(int id) {
+        return userDAO.findUserById(id);
+    }
 }

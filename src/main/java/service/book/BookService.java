@@ -31,4 +31,8 @@ public class BookService implements IBookService {
     public Map<Integer, String> getCategoryName() {
         return bookDAO.getCategoryName();
     }
+
+    public List<Book> findBookById(int userID, int shelfID){
+        return bookDAO.findBookByUserID(userID, shelfID);
+    }
 }

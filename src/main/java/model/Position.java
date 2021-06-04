@@ -1,19 +1,44 @@
 package model;
 
 public class Position {
+    private int id;
     private String name;
     private String description;
-    private int available;
+    private int capacity;
     private int using;
+    private int userID;
 
-    public Position(String name, String description, int available, int using) {
+    public Position(int id, String name, String description, int inUse, int capacity) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.available = available;
-        this.using = using;
+        this.using = inUse;
+        this.capacity = capacity;
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public Position(String name, String description, int capacity, int userID) {
+        this.name = name;
+        this.description = description;
+        this.capacity = capacity;
+        this.userID = userID;
+    }
+
+
     public Position() {
+    }
+
+    public Position(String name, String description, int capacity) {
+        this.name = name;
+        this.description = description;
+        this.capacity = capacity;
     }
 
     public String getName() {
@@ -32,12 +57,12 @@ public class Position {
         this.description = description;
     }
 
-    public int getAvailable() {
-        return available;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setAvailable(int available) {
-        this.available = available;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public int getUsing() {
@@ -46,5 +71,13 @@ public class Position {
 
     public void setUsing(int using) {
         this.using = using;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
