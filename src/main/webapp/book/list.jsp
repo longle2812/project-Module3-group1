@@ -29,7 +29,8 @@
             background-color: #04AA6D;
             color: white;
         }
-        img{
+
+        img {
             width: 200px;
             height: 200px;
         }
@@ -41,8 +42,8 @@
     <a href="/books?action=create">Create new books</a>
 </p>
 <form action="/books?action=search" method="post">
-    <input type="text" name="nameSearch" id="nameSearch" placeholder="Enter book name" >
-    <button >Search book by name</button>
+    <input type="text" name="nameSearch" id="nameSearch" placeholder="Enter book name">
+    <button>Search book by name</button>
 </form>
 <table>
     <tr>
@@ -53,22 +54,22 @@
         <th>Status</th>
         <th>Category</th>
         <th>Publisher</th>
-        <th>Position</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     <c:forEach items='${books}' var="book">
         <tr>
-            <td >${book.id}</td>
+            <td>${book.id}</td>
             <td><a href="/books?action=view&id=${book.id}">${book.name}</a></td>
             <td>${book.description}</td>
-            <td><img src="${book.imageURL}" alt="book image"></td>
+            <td><img src="${book.imgURL}" alt="book image"></td>
             <td>${book.status}</td>
-            <td>${book.category_id}</td>
+            <td>
+                ${categories.get(book.category_id)}
+            </td>
             <td>${book.publisher}</td>
-            <td>${book.position}</td>
-            <td><a href="/products?action=edit&id=${product.id}">Edit</a></td>
-            <td><a href="/products?action=delete&id=${product.id}">Delete</a></td>
+            <td><a href="/products?action=edit&id=${book.id}">Edit</a></td>
+            <td><a href="/products?action=delete&id=${book.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

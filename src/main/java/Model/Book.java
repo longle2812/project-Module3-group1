@@ -4,11 +4,10 @@ public class Book {
     private int id;
     private String name;
     private String description;
-    private String imageURL;
+    private String imgURL;
     private String status;
     private int category_id;
     private String publisher;
-    private int position;
 
     public Book() {
     }
@@ -21,15 +20,14 @@ public class Book {
         this.id = id;
     }
 
-    public Book(int id, String name, String description, String imageURL, String status, int category_id, String publisher, int position) {
+    public Book(int id, String name, String description, String imgURL, String status, int category_id, String publisher) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.imageURL = imageURL;
+        this.imgURL = imgURL;
         this.status = status;
         this.category_id = category_id;
         this.publisher = publisher;
-        this.position = position;
     }
 
     public String getName() {
@@ -48,12 +46,12 @@ public class Book {
         this.description = description;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImgURL() {
+        return imgURL;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public String getStatus() {
@@ -80,11 +78,4 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
 }

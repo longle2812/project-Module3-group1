@@ -4,6 +4,7 @@ import DAO.Book.BookDAO;
 import Model.Book;
 
 import java.util.List;
+import java.util.Map;
 
 public class BookService implements iBookService {
     BookDAO bookDAO = new BookDAO();
@@ -26,5 +27,8 @@ public class BookService implements iBookService {
     @Override
     public List<Book> findAll() {
         return bookDAO.findAll();
+    }
+    public Map<Integer, String> getCategoryName() {
+        return bookDAO.getCategoryName();
     }
 }

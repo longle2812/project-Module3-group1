@@ -10,6 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "BookServlet", value = "/books")
 public class BookServlet extends HttpServlet {
@@ -34,14 +35,17 @@ public class BookServlet extends HttpServlet {
     }
 
     private void showBookList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> bookList = new ArrayList<>();
-        bookList = bookService.findAll();
+        List<Book> bookList = bookService.findAll();
+        Map<Integer, String> categoryList = bookService.getCategoryName();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
         request.setAttribute("books", bookList);
+        request.setAttribute("categories", categoryList);
         requestDispatcher.forward(request, response);
     }
 
-    private void showCreateForm(HttpServletRequest request, HttpServletResponse response) {
+    private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/create.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     @Override
