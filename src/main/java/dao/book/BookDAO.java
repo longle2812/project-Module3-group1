@@ -98,14 +98,11 @@ public class BookDAO implements IBookDAO {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String  = resultSet.getString("email");
-                String country = resultSet.getString("country");
-                user = new User(id, name, email, country);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return book;
     }
 }
