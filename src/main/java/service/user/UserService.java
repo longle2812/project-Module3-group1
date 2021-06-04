@@ -16,7 +16,7 @@ public class UserService implements IUserService {
 
     @Override
     public boolean update(int id, User user) {
-        return false;
+        return userDAO.update(id, user);
     }
 
     @Override

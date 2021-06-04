@@ -4,8 +4,11 @@
 <head>
     <title>Title</title>
 </head>
-<h3> Change password</h3>
 <body>
+<h3> Change password</h3>
+<p>
+    <a href="/home?action=userMenu">Back to homepage</a>
+</p>
     <form method="post">
         <table>
             <tr>

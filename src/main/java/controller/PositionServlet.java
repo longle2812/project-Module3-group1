@@ -28,10 +28,30 @@ public class PositionServlet extends HttpServlet {
             case "view":
                 showViewShelfForm(request, response);
                 break;
+            case "edit":
+                showEditShelfForm(request, response);
+                break;
+            case"delete":
+                deleteShelf(request,response);
+                break;
             default:
                 shelfMainMenu(request, response);
                 break;
         }
+    }
+
+    private void deleteShelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int shelfId = Integer.parseInt(request.getParameter("id"));
+        this.positionService.delete(shelfId);
+        response.sendRedirect("/shelves");
+    }
+
+    private void showEditShelfForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int shelfID = Integer.parseInt(request.getParameter("shelfID"));
+        Position position = this.positionService.findShelfByID(shelfID);
+        request.setAttribute("shelf", position);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/position/edit.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void showViewShelfForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -76,9 +96,38 @@ public class PositionServlet extends HttpServlet {
         switch (action) {
             case "create":
                 addNewShelf(request, response);
+                break;
+            case"edit":
+                editShelfInfo(request, response);
+                break;
             default:
                 break;
         }
+    }
+
+    private void editShelfInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int shelfId = Integer.parseInt(request.getParameter("shelfId"));
+        Position position = this.positionService.findShelfByID(shelfId);
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String capacity = request.getParameter("capacity");
+        RequestDispatcher requestDispatcher;
+        if (!name.equals("")){
+            position.setName(name);
+        }
+        if (!description.equals("")){
+            position.setName(description);
+        }
+        if (!capacity.equals("")){
+            position.setCapacity(Integer.parseInt(capacity));
+        }
+        if (this.positionService.update(shelfId, position)){
+            request.setAttribute("message", "Edit success");
+        }
+        requestDispatcher = request.getRequestDispatcher("/position/create.jsp");
+        requestDispatcher.forward(request, response);
+
+
     }
 
     private void addNewShelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

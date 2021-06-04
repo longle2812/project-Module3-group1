@@ -13,8 +13,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <%--Sign out button--%>
-<form action="/userServlet"><input type="submit" value="Sign Out"></form>
+<form action="/"><input type="submit" value="Sign Out"></form>
 
 <%--User Detail Form--%>
 <p>
@@ -28,30 +31,30 @@
         <table id="userDetail">
             <tr>
                 <td> Name:</td>
-                <td><c:out value="${user.getName()}"></c:out></td>
+                <td>${user.getName()}</td>
             </tr>
             <tr>
                 <td> Email:</td>
-                <td><span name="email"><c:out value="${user.getEmail()}"></c:out></span></td>
+                <td>${user.getEmail()}</td>
             </tr>
             <tr>
                 <td> Date of Birth:</td>
-                <td><c:out value="${user.getdOb()}"></c:out></td>
+                <td>${user.getdOb()}</td>
             </tr>
             <tr>
                 <td> Phone Number:</td>
-                <td><c:out value="${user.getPhoneNumber()}"></c:out></td>
+                <td>${user.getPhoneNumber()}</td>
             </tr>
             <tr>
                 <td> Avatar URL:</td>
-                <td><c:out value="${user.getAvatarURL()}"></c:out></td>
+                <td>${user.getAvatarURL()}</td>
             </tr>
             <tr>
 
                 <td>
-                    <a href="/userServlet?action=changePassword&email=${user.getEmail()}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Change password</a>
+                    <a href="/home?action=changePassword" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Change password</a>
                 </td>
-                <td></td>
+                <td><a href="/home?action=edit" class="btn btn-warning btn-sm active" role="button" aria-pressed="true">Edit information</a></td>
             </tr>
         </table>
     </div>

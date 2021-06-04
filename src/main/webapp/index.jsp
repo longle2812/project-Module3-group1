@@ -44,7 +44,7 @@
 <%--    </form>--%>
 <%--</div>--%>
 <%--New Menu--%>
-    <form class="px-4 py-3" action="/userServlet?action=signIn" method="post">
+    <form class="px-4 py-3" action="/home?action=signIn" method="post">
         <div class="mb-3">
             <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
             <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
@@ -65,7 +65,7 @@
         <button type="submit" class="btn btn-primary" >Sign in</button>
     </form>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="/userServlet?action=signUp">New around here? Sign up</a>
+    <a class="dropdown-item" href="/home?action=signUp">New around here? Sign up</a>
     <a class="dropdown-item" href="#">Forgot password?</a>
 </body>
 </html>

@@ -14,8 +14,9 @@ public class User {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.dOb = dOb;
+        this.dOb = dob;
         this.phoneNumber = phoneNumber;
+        this.avatarURL = avatarURL;
     }
 
     public User(String email, String password, String name, String dOb, String phoneNumber) {

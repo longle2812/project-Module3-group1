@@ -15,7 +15,20 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean update(int id, User user) {
-        return false;
+        Connection connection = SQLConnection.getConnection();
+        int rowUpdate = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set name=?,dOB=?,phoneNumber=?,avatarURL=? where id=?");
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getdOb());
+            preparedStatement.setString(3, user.getPhoneNumber());
+            preparedStatement.setString(4, user.getAvatarURL());
+            preparedStatement.setInt(5, id);
+            rowUpdate = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowUpdate != 0;
     }
 
     @Override
@@ -77,7 +90,7 @@ public class UserDAO implements IUserDAO {
                 String dob = resultSet.getString("dob");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String avatarURL = resultSet.getString("avatarURL");
-                User user = new User(id,email1, password, name, dob, phoneNumber, avatarURL);
+                User user = new User(id, email1, password, name, dob, phoneNumber, avatarURL);
                 return user;
             }
         } catch (SQLException throwables) {

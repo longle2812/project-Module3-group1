@@ -15,12 +15,12 @@ public class PositionService implements IPositionService {
 
     @Override
     public boolean update(int id, Position position) {
-        return false;
+        return positionDAO.update(id, position);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return positionDAO.delete(id);
     }
 
     public List<Position> findAllByID(int userId) {
@@ -32,4 +32,7 @@ public class PositionService implements IPositionService {
         return null;
     }
 
+    public Position findShelfByID(int shelfID) {
+        return positionDAO.findShelfByID(shelfID);
+    }
 }

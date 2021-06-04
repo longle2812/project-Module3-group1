@@ -15,6 +15,10 @@
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
         crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 <%--Nav bar--%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -25,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/home?action=userMenu">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/shelves">Shelf</a>
@@ -69,12 +73,48 @@
                 <h5 class="card-title">${position.getName()}</h5>
                 <p class="card-text">${position.getUsing()} / ${position.getCapacity()}</p>
                 <a href="?action=view&shelfID=${position.getId()}" class="btn btn-primary">View</a>
-                <a href="?action=view" class="btn btn-danger">Delete</a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-delete="${position.getId()}">
+                    Delete
+                </button>
+                <a href="?action=edit&shelfID=${position.getId()}" class="btn btn-warning"> Edit </a>
             </div>
         </div>
     </div>
 </c:forEach>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Be Careful</strong> Deleted shelf can not be recover!
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Please don't</button>
+                <a id="del-button" class="btn btn-danger" role="button">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    $(document).ready(function() {
+        $('#exampleModal').on('show.bs.modal', function(e) {
+            var deleteid = $(e.relatedTarget).data('delete');
+            $('#del-button').click(function() {
+                window.location.href = '/shelves?action=delete&id='+deleteid;
+                return false;
+            });
+        });
+    });
+</script>
 </body>
 </html>
