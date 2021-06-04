@@ -1,7 +1,7 @@
-package DAO.User;
+package dao.user;
 
-import DAO.SQLConnection;
-import Model.User;
+import dao.SQLConnection;
+import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDAO implements iUserDAO {
+public class UserDAO implements IUserDAO {
 
     public static final String CREATE_NEW_USER = "insert into user (email, password, name, dob, phoneNumber,avatarURL) values (?,?,?,?,?,'')";
 

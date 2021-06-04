@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Book {
     private int id;
@@ -10,6 +10,15 @@ public class Book {
     private String publisher;
 
     public Book() {
+    }
+
+    public Book(String name, String description, String imgURL, String status, int category_id, String publisher) {
+        this.name = name;
+        this.description = description;
+        this.imgURL = imgURL;
+        this.status = status;
+        this.category_id = category_id;
+        this.publisher = publisher;
     }
 
     public int getId() {

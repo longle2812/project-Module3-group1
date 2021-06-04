@@ -1,13 +1,12 @@
-package Service.User;
+package service.user;
 
-import DAO.User.UserDAO;
-import Model.User;
-import Service.User.iUserService;
+import dao.user.UserDAO;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService implements iUserService {
+public class UserService implements IUserService {
     List<User> users = new ArrayList<>();
     UserDAO userDAO = new UserDAO();
     @Override

@@ -24,7 +24,7 @@
     </c:if>
 </p>
 <p>
-    <a href="/users">Back to book list</a>
+    <a href="/books">Back to book list</a>
 </p>
 
 <form action="" method="post">
@@ -40,13 +40,42 @@
                 <td><input type="text" name="description" id="description"></td>
             </tr>
             <tr>
-                <td>Country</td>
-                <td><input type="text" name="country" id="country"></td>
+                <td>Image URL</td>
+                <td><input type="text" name="imgURL" id="imgURL"></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <label class="container">New
+                        <input type="radio" checked="checked" name="status" value="new">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Old
+                        <input type="radio" name="status" value="old">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="category_id" id="category_id">
+                        <c:forEach items="${categories.entrySet()}" var="category">
+                            <option value="${category.getKey()}">
+                                <c:out value="${category.getValue()}"/>
+                            </option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Publisher</td>
+                <td><input type="text" name="publisher" id="publisher"></td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <button>Add user</button>
+                    <button>Add book</button>
                 </td>
             </tr>
         </table>

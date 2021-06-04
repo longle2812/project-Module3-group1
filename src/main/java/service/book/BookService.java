@@ -1,17 +1,17 @@
-package Service.Book;
+package service.book;
 
-import DAO.Book.BookDAO;
-import Model.Book;
+import dao.book.BookDAO;
+import model.Book;
 
 import java.util.List;
 import java.util.Map;
 
-public class BookService implements iBookService {
+public class BookService implements IBookService {
     BookDAO bookDAO = new BookDAO();
 
     @Override
     public boolean createNew(Book book) {
-        return false;
+        return bookDAO.createNew(book);
     }
 
     @Override

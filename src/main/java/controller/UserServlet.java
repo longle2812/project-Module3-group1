@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import Model.User;
-import Service.User.UserService;
+import model.User;
+import service.user.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

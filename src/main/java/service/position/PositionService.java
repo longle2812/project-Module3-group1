@@ -1,12 +1,12 @@
-package DAO.Position;
+package service.position;
 
-import DAO.iGeneralDAO;
-import Model.Position;
+import model.Position;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class iPositionDAO implements iGeneralDAO<Position> {
+public class PositionService implements IPositionService {
+
+
     @Override
     public boolean createNew(Position position) {
         return false;
@@ -24,7 +24,6 @@ public class iPositionDAO implements iGeneralDAO<Position> {
 
     @Override
     public List<Position> findAll() {
-        List<Position> positionList = new ArrayList<>();
-        return positionList;
+        return null;
     }
 }
