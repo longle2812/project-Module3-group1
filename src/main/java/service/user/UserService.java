@@ -35,5 +35,12 @@ public class UserService implements IUserService {
         return userDAO.signIn(email, password);
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return userDAO.findUserByEmail(email);
+    }
 
+    public boolean changePassword(User user, String newPassword) {
+        return userDAO.changePassword(user, newPassword);
+    }
 }

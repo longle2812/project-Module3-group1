@@ -1,4 +1,3 @@
-drop database  book_management;
 create database book_management;
 use book_management;
 

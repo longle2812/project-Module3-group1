@@ -19,6 +19,15 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public User(String email, String password, String name, String dOb, String phoneNumber, String avatarURL) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.dOb = dOb;
+        this.phoneNumber = phoneNumber;
+        this.avatarURL = avatarURL;
+    }
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;

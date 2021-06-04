@@ -22,10 +22,36 @@ public class UserServlet extends HttpServlet {
             case "signUp":
                 showSignUpForm(request, response);
                 break;
-
-            default:
-                showMainMenu(request, response);
+            case "changePassword":
+                changePasswordForm(request, response);
                 break;
+            case "userMenu":
+                showUserMenu(request, response);
+            default:
+                showLogin(request, response);
+                break;
+        }
+    }
+
+    private void showUserMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        User user = this.userService.findUserByEmail(email);
+        request.setAttribute("user", user);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/userProfile.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
+    private void changePasswordForm(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("email");
+        User user = this.userService.findUserByEmail(email);
+        try {
+            request.setAttribute("user", user);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user/changePassword.jsp");
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -42,8 +68,35 @@ public class UserServlet extends HttpServlet {
             case "signIn":
                 signIn(request, response);
                 break;
+            case "changePassword":
+                changePassword(request, response);
+                break;
             default:
                 break;
+        }
+    }
+
+    private void changePassword(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("email");
+        User user = this.userService.findUserByEmail(email);
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+        if (password.equals(confirmPassword)){
+            if (this.userService.changePassword(user, password)){
+                request.setAttribute("message", "Success");
+            }
+        }
+        else {
+            request.setAttribute("message", "Password mismatch");
+        }
+        request.setAttribute("user", user);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/changePassword.jsp");
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -53,9 +106,12 @@ public class UserServlet extends HttpServlet {
         boolean isSuccess = this.userService.signIn(email, password);
 
         if (isSuccess) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userProfile.jsp");
+            User user = this.userService.findUserByEmail(email);
+            request.setAttribute("user", user);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/userProfile.jsp");
             requestDispatcher.forward(request, response);
         } else {
+            request.setAttribute("message", "Fail");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -83,16 +139,16 @@ public class UserServlet extends HttpServlet {
             }
             else request.setAttribute("message", "Error");
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("UserAccount/signUp.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/signUp.jsp");
         requestDispatcher.forward(request, response);
     }
 
     private void showSignUpForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("UserAccount/signUp.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/signUp.jsp");
         requestDispatcher.forward(request, response);
     }
 
-    private void showMainMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }
