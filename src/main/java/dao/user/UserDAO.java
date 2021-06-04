@@ -14,24 +14,6 @@ public class UserDAO implements IUserDAO {
     public static final String CREATE_NEW_USER = "insert into user (email, password, name, dob, phoneNumber,avatarURL) values (?,?,?,?,?,'')";
 
     @Override
-    public boolean createNew(User user) {
-        Connection connection = SQLConnection.getConnection();
-        int rowInserted = 0;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_NEW_USER);
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getName());
-            preparedStatement.setString(4, user.getdOb());
-            preparedStatement.setString(5, user.getPhoneNumber());
-            rowInserted = preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            return rowInserted!=0;
-        }
-        return rowInserted!=0;
-    }
-
-    @Override
     public boolean update(int id, User user) {
         return false;
     }
@@ -44,6 +26,24 @@ public class UserDAO implements IUserDAO {
     @Override
     public List<User> findAll() {
         return null;
+    }
+
+    @Override
+    public boolean createNew(User user) {
+        Connection connection = SQLConnection.getConnection();
+        int rowInserted = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_NEW_USER);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getdOb());
+            preparedStatement.setString(5, user.getPhoneNumber());
+            rowInserted = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            return rowInserted != 0;
+        }
+        return rowInserted != 0;
     }
 
     public boolean signIn(String email, String password) {
@@ -60,5 +60,44 @@ public class UserDAO implements IUserDAO {
             throwables.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        Connection connection = SQLConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from user where email = ?");
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String email1 = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String name = resultSet.getString("name");
+                String dob = resultSet.getString("dob");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String avatarURL = resultSet.getString("avatarURL");
+                User user = new User(email1, password, name, dob, phoneNumber, avatarURL);
+                return user;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean changePassword(User user, String newPassword) {
+        Connection connection = SQLConnection.getConnection();
+        String email = user.getEmail();
+        int rowUpdated = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set password = ? where email = ?");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, email);
+            rowUpdated = preparedStatement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowUpdated != 0;
     }
 }
