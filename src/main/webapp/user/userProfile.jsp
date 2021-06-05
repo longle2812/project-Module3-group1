@@ -60,9 +60,6 @@
     </div>
 </div>
 
-<p> <strong ><%=session.getAttribute("userID") %> </strong> </p>
-
-
 
 <%--Nav bar--%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

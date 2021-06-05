@@ -20,10 +20,7 @@ public class BookDAO implements IBookDAO {
     public static final String SELECT_BOOK_BY_ID = "select * from book where id = ?";
     public static final String DELETE_BOOK_BY_ID = "delete from book where id =?";
     public static final String SELECT_BOOK_BY_NAME = "select * from book where name like ?";
-    public static final String SELECT_BOOK_BY_USERID_SHELFID = "select * from book \n" +
-            "         join changelog c on book.id = c.bookId\n" +
-            "         join shelf s on c.shelfId = s.id\n" +
-            "where shelfId = ? & c.userId = ?";
+    public static final String SELECT_BOOK_BY_USERID_SHELFID = "select * from book join changelog on book.id = changelog.bookId where shelfId = ?";
 
     @Override
     public boolean createNew(Book book) {
@@ -173,7 +170,6 @@ public class BookDAO implements IBookDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_USERID_SHELFID);
             preparedStatement.setInt(1, shelfID);
-            preparedStatement.setInt(2, userID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int id = resultSet.getInt("book.id");

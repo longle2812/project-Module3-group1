@@ -151,7 +151,7 @@ public class UserServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         } else {
             request.setAttribute("message", "Fail");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/loginMenu.jsp");
             requestDispatcher.forward(request, response);
         }
 
@@ -178,17 +178,17 @@ public class UserServlet extends HttpServlet {
             }
             else request.setAttribute("message", "Error");
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/signUp.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/signupMenu.jsp");
         requestDispatcher.forward(request, response);
     }
 
     private void showSignUpForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/signUp.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/signupMenu.jsp");
         requestDispatcher.forward(request, response);
     }
 
     private void showLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/loginMenu.jsp");
         requestDispatcher.forward(request, response);
     }
 }

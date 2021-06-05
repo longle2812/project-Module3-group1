@@ -1,71 +1,129 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Main menu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Sssoon Page </title>
+
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/coming-sssoon.css" rel="stylesheet" />
+
+    <!--     Fonts     -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
 </head>
+
 <body>
-<%--Bootstrap--%>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-        crossorigin="anonymous"></script>
-
-<h3> WELCOME</h3>
-<h4> Login Panel</h4>
-<%--<div>--%>
-<%--    <form action="/userServlet?action=signIn" method="post">--%>
-<%--        <table>--%>
-<%--            <tr>--%>
-<%--                <td>Username</td>--%>
-<%--                <td><input type="text" name="email"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Password</td>--%>
-<%--                <td><input type="password" name="password"></td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>--%>
-<%--                    <button><a href="/userServlet?action=signUp" class="button"> Create new account</a></button>--%>
-<%--                </td>--%>
-<%--                <td><input type="submit" value="Login"></td>--%>
-
-<%--            </tr>--%>
-<%--            <c:if test="${message != null}">--%>
-<%--                <tr>--%>
-<%--                    <td style="color: red">Invalid email or password</td>--%>
-<%--                </tr>--%>
-<%--            </c:if>--%>
-<%--        </table>--%>
-<%--    </form>--%>
-<%--</div>--%>
-<%--New Menu--%>
-    <form class="px-4 py-3" action="/home?action=signIn" method="post">
-        <div class="mb-3">
-            <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-            <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+<nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
-        <div class="mb-3">
-            <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-            <input name="password" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-        </div>
-        <div class="mb-3">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                <label class="form-check-label" for="dropdownCheck">
-                    Remember me
-                </label>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="images/flags/US.png"/>
+                        English(US)
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><img src="images/flags/DE.png"/> Deutsch</a></li>
+                        <li><a href="#"><img src="images/flags/GB.png"/> English(UK)</a></li>
+                        <li><a href="#"><img src="images/flags/FR.png"/> Français</a></li>
+                        <li><a href="#"><img src="images/flags/RO.png"/> Română</a></li>
+                        <li><a href="#"><img src="images/flags/IT.png"/> Italiano</a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="#"><img src="images/flags/ES.png"/> Español <span class="label label-default">soon</span></a></li>
+                        <li><a href="#"><img src="images/flags/BR.png"/> Português <span class="label label-default">soon</span></a></li>
+                        <li><a href="#"><img src="images/flags/JP.png"/> 日本語 <span class="label label-default">soon</span></a></li>
+                        <li><a href="#"><img src="images/flags/TR.png"/> Türkçe <span class="label label-default">soon</span></a></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-facebook-square"></i>
+                        Share
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-twitter"></i>
+                        Tweet
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-envelope-o"></i>
+                        Email
+                    </a>
+                </li>
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+<div class="main" style="background-image: url('images/default.jpg')">
+
+    <!--    Change the image source '/images/default.jpg' with your favourite image.     -->
+
+    <div class="cover black" data-color="black"></div>
+
+    <!--   You can change the black color for the filter with those colors: blue, green, red, orange       -->
+
+    <div class="container">
+        <h1 class="logo cursive">
+            Bbookkk
+        </h1>
+        <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
+
+        <div class="content">
+            <h4 class="motto">Best book management service</h4>
+            <div class="subscribe">
+                <h5 class="info-text">
+                    Join us now. We keep you up to date.
+                </h5>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 col-sm6-6 col-sm-offset-3 ">
+                        <form class="form-inline" role="form" action="/home" method="get">
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                <input type="text" class="form-control transparent" placeholder="Type anything..">
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-fill">Let's go</button>
+                        </form>
+
+                    </div>
+                </div>
             </div>
         </div>
-<%--        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign In</a>--%>
-        <button type="submit" class="btn btn-primary" >Sign in</button>
-    </form>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="/home?action=signUp">New around here? Sign up</a>
-    <a class="dropdown-item" href="#">Forgot password?</a>
+    </div>
+    <div class="footer">
+        <div class="container">
+            Made with <i class="fa fa-heart heart"></i> by <a href="http://www.google.com">Google search</a>. Free download <a href="http://www.google.com/search?q=không+làm+mà+đòi+ăn">here.</a>
+        </div>
+    </div>
+</div>
 </body>
+<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
 </html>
