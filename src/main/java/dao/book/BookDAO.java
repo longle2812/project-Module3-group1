@@ -24,6 +24,7 @@ public class BookDAO implements IBookDAO {
             "         join changelog c on book.id = c.bookId\n" +
             "         join shelf s on c.shelfId = s.id\n" +
             "where shelfId = ? & c.userId = ?";
+    public static final String SELECT_BOOK_BY_CATEGORY = "select * from book where category_id = ?";
 
     @Override
     public boolean createNew(Book book) {
@@ -160,6 +161,29 @@ public class BookDAO implements IBookDAO {
                 int category_id = resultSet.getInt("category_id");
                 String publisher = resultSet.getString("publisher");
                 bookList.add(new Book(id, name1, description, imgURL, status, category_id, publisher));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return bookList;
+    }
+
+    @Override
+    public List<Book> searchByCategory(int category_id) {
+        List<Book> bookList = new ArrayList<>();
+        Connection connection = SQLConnection.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_CATEGORY);
+            preparedStatement.setInt(1, category_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                String imgURL = resultSet.getString("imgURL");
+                String status = resultSet.getString("status");
+                String publisher = resultSet.getString("publisher");
+                bookList.add(new Book(id, name, description, imgURL, status, category_id, publisher));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -26,11 +26,11 @@ public class BookServlet extends HttpServlet {
                 showCreateForm(request, response);
                 break;
             }
-            case "edit":{
+            case "edit": {
                 showEditForm(request, response);
                 break;
             }
-            case "delete":{
+            case "delete": {
                 deleteUser(request, response);
                 break;
             }
@@ -45,42 +45,46 @@ public class BookServlet extends HttpServlet {
         String name = request.getParameter("nameSearch");
         List<Book> bookList = bookService.searchByName(name);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
-        request.setAttribute("books",bookList);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("books", bookList);
+        requestDispatcher.forward(request, response);
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         RequestDispatcher requestDispatcher;
-        if(!bookService.delete(id)){
-            requestDispatcher =request.getRequestDispatcher("error-404.jsp");
-        }else{
+        if (!bookService.delete(id)) {
+            requestDispatcher = request.getRequestDispatcher("error-404.jsp");
+        } else {
             List<Book> bookList = bookService.findAll();
             requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
             request.setAttribute("books", bookList);
         }
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id =  Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         Map<Integer, String> categoryList = bookService.getCategoryName();
         Book book = bookService.findByID(id);
         RequestDispatcher requestDispatcher;
-        if(book==null){
+        if (book == null) {
             requestDispatcher = request.getRequestDispatcher("error-404.jsp");
-        }else{
+        } else {
             requestDispatcher = request.getRequestDispatcher("/book/edit.jsp");
             request.setAttribute("book", book);
             request.setAttribute("categories", categoryList);
         }
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
 
     private void showBookList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String q = request.getParameter("q");
+        String category_id = request.getParameter("category_id");
         List<Book> bookList;
-        if(q==null || q.equals("")){
+        if (category_id!=null) {
+            int cate_id = Integer.parseInt(category_id);
+            bookList = bookService.searchByCategory(cate_id);
+        } else if(q == null || q.equals("") || category_id == null){
             bookList = bookService.findAll();
         }else{
             bookList = bookService.searchByName(q);
@@ -96,7 +100,7 @@ public class BookServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/create.jsp");
         Map<Integer, String> categoryList = bookService.getCategoryName();
         request.setAttribute("categories", categoryList);
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
 
     @Override
@@ -107,10 +111,10 @@ public class BookServlet extends HttpServlet {
         }
         switch (action) {
             case "create": {
-                createNewBook(request,response);
+                createNewBook(request, response);
                 break;
             }
-            case "edit":{
+            case "edit": {
                 editBook(request, response);
                 break;
             }
@@ -126,11 +130,11 @@ public class BookServlet extends HttpServlet {
         String status = request.getParameter("status");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         String publisher = request.getParameter("publisher");
-        Book book = new Book(name,description,imgURL,status,category_id,publisher);
+        Book book = new Book(name, description, imgURL, status, category_id, publisher);
         RequestDispatcher requestDispatcher;
-        if(!bookService.update(id, book)){
+        if (!bookService.update(id, book)) {
             requestDispatcher = request.getRequestDispatcher("error-404.jsp");
-        }else{
+        } else {
             request.setAttribute("message", "Book was updated");
             requestDispatcher = request.getRequestDispatcher("/book/edit.jsp");
         }
@@ -144,11 +148,11 @@ public class BookServlet extends HttpServlet {
         String status = request.getParameter("status");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         String publisher = request.getParameter("publisher");
-        Book book = new Book(name,description,imgURL,status,category_id,publisher);
+        Book book = new Book(name, description, imgURL, status, category_id, publisher);
         RequestDispatcher requestDispatcher;
-        if(!bookService.createNew(book)){
+        if (!bookService.createNew(book)) {
             requestDispatcher = request.getRequestDispatcher("error-404.jsp");
-        }else{
+        } else {
             request.setAttribute("message", "New book added");
             requestDispatcher = request.getRequestDispatcher("/book/create.jsp");
         }

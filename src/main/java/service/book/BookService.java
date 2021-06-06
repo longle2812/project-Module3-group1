@@ -44,6 +44,11 @@ public class BookService implements IBookService {
         return bookDAO.searchByName(name);
     }
 
+    @Override
+    public List<Book> searchByCategory(int category_id) {
+        return bookDAO.searchByCategory(category_id);
+    }
+
     public List<Book> findBookById(int userID, int shelfID){
         return bookDAO.findBookByUserID(userID, shelfID);
     }

@@ -10,4 +10,5 @@ public interface IBookDAO extends IGeneralDAO<Book> {
     Map<Integer, String> getCategoryName();
     Book findByID(int id);
     List<Book> searchByName(String name);
+    List<Book> searchByCategory(int category_id);
 }
