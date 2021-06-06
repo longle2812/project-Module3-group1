@@ -53,7 +53,7 @@
                     ${categories.get(book.getCategory_id)}
             </td>
             <td>${book.getPublisher()}</td>
-            <td><a href="/products?action=delete&id=${book.getId()}">Delete</a></td>
+            <td><a href="/shelves?action=deleteBook&bookId=${book.getId()}&shelfId=${shelfId}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

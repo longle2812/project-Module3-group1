@@ -3,6 +3,8 @@ package service.book;
 import dao.book.BookDAO;
 import model.Book;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -51,4 +53,5 @@ public class BookService implements IBookService {
     public boolean addBookToShelf(int userId, int bookId, int shelfId) {
         return bookDAO.addBookToShelf(userId, bookId, shelfId);
     }
+
 }

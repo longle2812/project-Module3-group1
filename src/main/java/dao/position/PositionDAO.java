@@ -115,4 +115,18 @@ public class PositionDAO implements IPositionDAO {
         }
         return position;
     }
+
+    public boolean deleteBookFromShelf(int shelfId, int bookId) {
+        Connection connection = SQLConnection.getConnection();
+        int rowDeleted = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from changelog where bookId =? and shelfId =?");
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.setInt(2, shelfId);
+            rowDeleted = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowDeleted!=0;
+    }
 }

@@ -34,10 +34,20 @@ public class PositionServlet extends HttpServlet {
             case"delete":
                 deleteShelf(request,response);
                 break;
+            case "deleteBook":
+                deleteBook(request, response);
+                break;
             default:
                 shelfMainMenu(request, response);
                 break;
         }
+    }
+
+    private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int shelfId = Integer.parseInt(request.getParameter("shelfId"));
+        int bookId = Integer.parseInt(request.getParameter("bookId"));
+        positionService.deleteBookFromShelf(shelfId, bookId);
+        response.sendRedirect("shelves?action=view&shelfID="+shelfId);
     }
 
     private void deleteShelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,6 +69,7 @@ public class PositionServlet extends HttpServlet {
         int shelfID = Integer.parseInt(request.getParameter("shelfID"));
         List<Book> bookList = this.bookService.findBookById(userID, shelfID);
         request.setAttribute("books", bookList);
+        request.setAttribute("shelfId", shelfID);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("position/view.jsp");
         requestDispatcher.forward(request, response);
     }

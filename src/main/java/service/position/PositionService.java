@@ -3,6 +3,8 @@ package service.position;
 import dao.position.PositionDAO;
 import model.Position;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class PositionService implements IPositionService {
@@ -34,5 +36,9 @@ public class PositionService implements IPositionService {
 
     public Position findShelfByID(int shelfID) {
         return positionDAO.findShelfByID(shelfID);
+    }
+
+    public boolean deleteBookFromShelf(int shelfId, int bookId) {
+        return positionDAO.deleteBookFromShelf(shelfId, bookId);
     }
 }
