@@ -147,7 +147,7 @@ public class UserServlet extends HttpServlet {
             User user = this.userService.findUserByEmail(email);
             request.setAttribute("user", user);
             session.setAttribute("userID",user.getId());
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/userProfile.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/mainMenu.jsp");
             requestDispatcher.forward(request, response);
         } else {
             request.setAttribute("message", "Fail");

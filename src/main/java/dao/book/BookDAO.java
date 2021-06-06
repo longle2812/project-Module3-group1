@@ -18,7 +18,7 @@ public class BookDAO implements IBookDAO {
     public static final String SELECT_ALL_CATEGORY = "select * from category;";
     public static final String INSERT_NEW_BOOK = "insert into book (name, description, imgURL, status,category_id,  publisher) values(?,?,?,?,?,?)";
     public static final String SELECT_BOOK_BY_ID = "select * from book where id = ?";
-    public static final String DELETE_BOOK_BY_ID = "delete from book where id =?";
+    public static final String DELETE_BOOK_BY_ID = "delete from book where id = ?";
     public static final String SELECT_BOOK_BY_NAME = "select * from book where name like ?";
     public static final String SELECT_BOOK_BY_USERID_SHELFID = "select * from book join changelog on book.id = changelog.bookId where shelfId = ?";
 
@@ -71,7 +71,14 @@ public class BookDAO implements IBookDAO {
             preparedStatement.setInt(1, id);
             rowDeleted = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("delete from changelog where bookId = ?");
+                preparedStatement.setInt(1,id);
+                preparedStatement.executeUpdate();
+                delete(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return rowDeleted != 0;
     }
@@ -186,5 +193,21 @@ public class BookDAO implements IBookDAO {
             throwables.printStackTrace();
         }
         return bookList;
+    }
+
+    public boolean addBookToShelf(int userId, int bookId, int shelfId) {
+        Connection connection = SQLConnection.getConnection();
+        int rowInserted = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into changelog (userId, shelfId, bookId) values (?,?,?)");
+            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(2, shelfId);
+            preparedStatement.setInt(3, bookId);
+            rowInserted = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            rowInserted=0;
+        }
+        return rowInserted!=0;
+
     }
 }

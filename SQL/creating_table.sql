@@ -41,14 +41,15 @@ create table shelf
     foreign key (userId) references user(id)
 );
 
+
 create table changelog(
-    id int auto_increment primary key ,
     userId int,
     shelfId int,
     bookId int,
     foreign key (userId) references user(id),
     foreign key (shelfId) references shelf(id),
-    foreign key (bookId) references book(id)
+    foreign key (bookId) references book(id),
+    primary key (shelfId, bookId)
 );
 
 insert into category(name)

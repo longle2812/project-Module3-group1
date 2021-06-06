@@ -1,19 +1,20 @@
 package controller;
 
 import model.Book;
+import model.Position;
 import service.book.BookService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "BookServlet", value = "/books")
 public class BookServlet extends HttpServlet {
     BookService bookService = new BookService();
+    PositionServlet positionServlet = new PositionServlet();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,14 +32,28 @@ public class BookServlet extends HttpServlet {
                 break;
             }
             case "delete":{
-                deleteUser(request, response);
+                deleteBook(request, response);
                 break;
             }
+            case "add":
+                addToShelf(request, response);
+                break;
             default: {
                 showBookList(request, response);
                 break;
             }
         }
+    }
+
+    private void addToShelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userID = (Integer) request.getSession(false).getAttribute("userID");
+        int bookId = Integer.parseInt(request.getParameter("bookId"));
+        int shelfId = Integer.parseInt(request.getParameter("shelfId"));
+        if (this.bookService.addBookToShelf(userID, bookId, shelfId)){
+            request.setAttribute("message", "success");
+        }
+        else  request.setAttribute("message", "error");
+        showBookList(request, response);
     }
 
     private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,17 +64,10 @@ public class BookServlet extends HttpServlet {
         requestDispatcher.forward(request,response);
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        RequestDispatcher requestDispatcher;
-        if(!bookService.delete(id)){
-            requestDispatcher =request.getRequestDispatcher("error-404.jsp");
-        }else{
-            List<Book> bookList = bookService.findAll();
-            requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
-            request.setAttribute("books", bookList);
-        }
-        requestDispatcher.forward(request,response);
+        this.bookService.delete(id);
+        response.sendRedirect("/books");
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,6 +86,9 @@ public class BookServlet extends HttpServlet {
     }
 
     private void showBookList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userID = (Integer) request.getSession(false).getAttribute("userID");
+        List<Position> positionList = this.positionServlet.positionService.findAllByID(userID);
+        request.setAttribute("shelfList", positionList);
         String q = request.getParameter("q");
         List<Book> bookList;
         if(q==null || q.equals("")){
@@ -114,7 +125,6 @@ public class BookServlet extends HttpServlet {
                 editBook(request, response);
                 break;
             }
-
         }
     }
 

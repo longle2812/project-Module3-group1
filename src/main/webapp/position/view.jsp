@@ -40,7 +40,6 @@
         <th>Status</th>
         <th>Category</th>
         <th>Publisher</th>
-        <th>Edit</th>
         <th>Delete</th>
     </tr>
     <c:forEach items='${books}' var="book">
@@ -54,7 +53,6 @@
                     ${categories.get(book.getCategory_id)}
             </td>
             <td>${book.getPublisher()}</td>
-            <td><a href="/products?action=edit&id=${book.getId()}">Edit</a></td>
             <td><a href="/products?action=delete&id=${book.getId()}">Delete</a></td>
         </tr>
     </c:forEach>

@@ -142,4 +142,5 @@ public class PositionServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("position/create.jsp");
         requestDispatcher.forward(request, response);
     }
+
 }

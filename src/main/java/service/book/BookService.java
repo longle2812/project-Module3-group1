@@ -47,4 +47,8 @@ public class BookService implements IBookService {
     public List<Book> findBookById(int userID, int shelfID){
         return bookDAO.findBookByUserID(userID, shelfID);
     }
+
+    public boolean addBookToShelf(int userId, int bookId, int shelfId) {
+        return bookDAO.addBookToShelf(userId, bookId, shelfId);
+    }
 }
