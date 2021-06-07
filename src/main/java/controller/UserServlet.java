@@ -115,7 +115,7 @@ public class UserServlet extends HttpServlet {
 
     private void changePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userID = (Integer) request.getSession(false).getAttribute("userID");
-        User user = this.userService.findUserById(1);
+        User user = this.userService.findUserById(userID);
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         if (password.equals(confirmPassword)) {

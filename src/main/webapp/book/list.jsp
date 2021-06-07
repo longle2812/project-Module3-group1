@@ -7,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Book Management</title>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
-    <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
-    <link href="../css/bookList.css">
+    <title>Book list</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet"/>
+    <link href="../css/simpleList.css" rel="stylesheet"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
+
+<body id="page-top">
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -24,105 +27,42 @@
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
 
-
-<%--Alert--%>
-<c:if test="${message == 'success'}">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Congratulation!</strong> Added successfully
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</c:if>
-<c:if test="${message == 'error'}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Ops</strong> This book is already in this shelf
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</c:if>
-
-
-<%--List--%>
-<div class="container">
-    <div class="row ">
-        <c:forEach items='${books}' var="book">
-            <div class="col-sm-4 ">
-                <div class="card-columns-fluid">
-                    <div class="card bg-light" style="width: 20rem; ">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="400"
-                             xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap"
-                             preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title>
-                            <rect width="100%" height="200%" fill="#868e96"/>
-                            <image xlink:href="${book.imgURL}"/>
-                        </svg>
-                        <div class="card-body">
-                            <h5 class="card-title "><a href="/books?action=view&id=${book.id}"> ${book.name}</a></h5>
-                            <p class="card-text">${book.description}</p>
-                            <a href="/books?action=edit&id=${book.id}" class="btn btn-primary">Edit</a>
-                            <button type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#exampleModal" data-add="${book.getId()}">
-                                Add to shelf
-                            </button>
-                            <a href="/books?action=delete&id=${book.id}" class="btn btn-danger">Delete</a>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-
-    </div>
-</div> <!--container div  -->
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-black py-0 px-0"><a class="navbar-brand" href="#"><img id="logo"
+                                                                                                              src="https://i.imgur.com/K7Nwq4V.jpg">
+        &nbsp;&nbsp;&nbsp;Bbookk</a> <span class="v-line"></span>
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"><a class="nav-link" href="?action=userMenu">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="/shelves">Shelf</a></li>
+                <li class="nav-item"><a class="nav-link" href="/home?action=mainMenu">About</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Which's shelf to add?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong> Choose your shelf to add:</strong>
-                </div>
-                <div >
-                    <select class="form-control" id="dropDownList" name="dropDownList">
-                        <option selected value="default"> Please select an option</option>
-                        <c:forEach var="shelf" items="${shelfList}">
-                            <option value="${shelf.getId()}"> ${shelf.getName()}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a id="add-button" class="btn btn-success" role="button">Add</a>
-            </div>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container px-5 px-lg-6 h-100 position-relative">
+        <div class="gx-4 gx-lg-1 h-80 align-items-start text-start text-weight-bold">
         </div>
     </div>
-</div>
+</header>
 
-<script>
-    $(document).ready(function () {
-        $('#exampleModal').on('show.bs.modal', function (e) {
-            $("#dropDownList").change(function(){
-                value = $(this).val();
-            });
-            var bookId = $(e.relatedTarget).data('add');
-            $('#add-button').click(function () {
-                event.preventDefault();
-                window.location.href = '/books?action=add&bookId=' + bookId+'&shelfId='+value;
-            });
-            return false;
-        });
-    });
-</script>
+<%--Book List--%>
+<jsp:include page="test.jsp">
+    <jsp:param name="books" value="${books}" />
+    <jsp:param name="categories" value="${categories}" />
+    <jsp:param name="shelfList" value="${shelfList}" />
+    <jsp:param name="message" value="${message}"/>
+</jsp:include>
+
+
+<!-- Core theme JS-->
+<script src="../js/mainMenu.js"></script>
 </body>
 </html>
