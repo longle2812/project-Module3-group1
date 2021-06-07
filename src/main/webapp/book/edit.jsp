@@ -191,7 +191,7 @@
             </fieldset>
             <div class="submit-wrapper">
                 <button class="btn" type='submit'>Update book</button>
-                <div><a href="/books">Back to user list</a></div>
+                <div><a href="/books">Back to book list</a></div>
             </div>
         </form>
     </div>

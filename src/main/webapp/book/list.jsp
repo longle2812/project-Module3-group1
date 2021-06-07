@@ -3,6 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        image{
+            width:100%;
+            height:100%;
+        }
+    </style>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
@@ -12,8 +18,10 @@
     <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
     <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
     <link href="../css/bookList.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -45,6 +53,18 @@
 
 
 <%--List--%>
+<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Category
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <c:forEach items="${categories.entrySet()}" var="category">
+            <li><a class="dropdown-item"
+                   href="/books?action=cat_search&category_id=${category.getKey()}&userId=${userID}">${category.getValue()}</a></li>
+        </c:forEach>
+    </ul>
+</div>
+<div ></div>
 <div class="container">
     <div class="row ">
         <c:forEach items='${books}' var="book">
@@ -55,7 +75,7 @@
                              xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap"
                              preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title>
                             <rect width="100%" height="200%" fill="#868e96"/>
-                            <image xlink:href="${book.imgURL}"/>
+                            <a href="/books?action=view&userId=${userID}&book_id=${book.id}"><image xlink:href="${book.imgURL}"/></a>
                         </svg>
                         <div class="card-body">
                             <h5 class="card-title "><a href="/books?action=view&id=${book.id}"> ${book.name}</a></h5>
