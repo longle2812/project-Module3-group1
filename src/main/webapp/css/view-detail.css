@@ -1,0 +1,53 @@
+body {
+    display: grid;
+    grid-template-areas:
+    "header header header"
+    "nav article article"
+    "footer footer footer";
+    grid-template-rows: 80px 1fr 70px;
+    grid-template-columns: 20% 1fr 15%;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    height: 100vh;
+    margin: 0;
+}
+header, footer, article, nav, div {
+    padding: 1em;
+    background: yellowgreen;
+}
+#pageHeader {
+    grid-area: header;
+}
+#pageFooter {
+    grid-area: footer;
+}
+#mainArticle {
+    grid-area: article;
+}
+#mainNav {
+    grid-area: nav;
+}
+
+/* Stack the layout on small devices/viewports. */
+@media all and (max-width: 575px) {
+    body {
+        grid-template-areas:
+      "header"
+      "article"
+      "nav"
+      "footer";
+        grid-template-rows: 80px 1fr 70px 1fr 70px;
+        grid-template-columns: 1fr;
+    }
+}
+.details{
+    font-size:12px;
+    border-bottom: 1px solid #D8D8D8;
+    border-top: 1px solid #D8D8D8;
+
+}
+.infoBoxRowItem{
+    color: #382110;
+    font-weight: bold;
+    margin: 1px 0px;
+}

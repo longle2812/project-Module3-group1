@@ -2,6 +2,7 @@ package controller;
 
 import model.Book;
 import model.Position;
+import model.User;
 import service.book.BookService;
 
 import javax.servlet.*;
@@ -39,10 +40,31 @@ public class BookServlet extends HttpServlet {
             case "add":
                 addToShelf(request, response);
                 break;
+            case "view":{
+                viewBookDetail(request,response);
+                break;
+            }
             default:
                 showBookList(request, response);
                 break;
             }
+    }
+
+    private void viewBookDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userID = Integer.parseInt(request.getParameter("userId"));
+        int bookId = Integer.parseInt(request.getParameter("book_id"));
+        Book book = bookService.findByID(bookId);
+        RequestDispatcher requestDispatcher;
+        if(book==null){
+            requestDispatcher = request.getRequestDispatcher("error-404.jsp");
+        }else{
+            requestDispatcher = request.getRequestDispatcher("/book/view-detail.jsp");
+            Map<Integer, String> categoryList = bookService.getCategoryName();
+            request.setAttribute("categories", categoryList);
+            request.setAttribute("book", book);
+            request.setAttribute("userID",userID);
+        }
+        requestDispatcher.forward(request,response);
     }
 
     private void addToShelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,6 +126,7 @@ public class BookServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/list.jsp");
         request.setAttribute("books", bookList);
         request.setAttribute("categories", categoryList);
+        request.setAttribute("userID",userID);
         requestDispatcher.forward(request, response);
     }
 
