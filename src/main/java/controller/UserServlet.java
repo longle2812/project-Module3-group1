@@ -28,10 +28,18 @@ public class UserServlet extends HttpServlet {
             case "userMenu":
                 showUserMenu(request, response);
                 break;
+            case "mainMenu":
+                showMainMenu(request,response);
+                break;
             default:
                 showLogin(request, response);
                 break;
         }
+    }
+
+    private void showMainMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/mainMenu.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void showUserMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
