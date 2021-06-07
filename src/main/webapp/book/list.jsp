@@ -11,7 +11,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
     <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
-    <link href="/css/bookList.css">
+    <link href="../css/bookList.css">
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -108,10 +108,6 @@
         </div>
     </div>
 </div>
-
-<script>
-
-</script>
 
 <script>
     $(document).ready(function () {

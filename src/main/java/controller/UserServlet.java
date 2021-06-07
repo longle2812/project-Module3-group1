@@ -27,20 +27,11 @@ public class UserServlet extends HttpServlet {
                 break;
             case "userMenu":
                 showUserMenu(request, response);
-            case "edit":
-                showEditMenu(request, response);
+                break;
             default:
                 showLogin(request, response);
                 break;
         }
-    }
-
-    private void showEditMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userID = (Integer) request.getSession(false).getAttribute("userID");
-        User user = this.userService.findUserById(userID);
-        request.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/edit.jsp");
-        requestDispatcher.forward(request, response);
     }
 
     private void showUserMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,7 +73,8 @@ public class UserServlet extends HttpServlet {
                 changePassword(request, response);
                 break;
             case "edit":
-                editInformation(request, response);
+                editInformation(request,response);
+                break;
             default:
                 break;
         }
@@ -108,10 +100,10 @@ public class UserServlet extends HttpServlet {
             user.setAvatarURL(avatarURL);
         }
         if (this.userService.update(userID, user)){
-            request.setAttribute("message", "Update success");
+            request.setAttribute("message", "success");
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/edit.jsp");
-        requestDispatcher.forward(request, response);
+        else request.setAttribute("message", "error");
+        showUserMenu(request,response);
     }
 
     private void changePassword(HttpServletRequest request, HttpServletResponse response) {
