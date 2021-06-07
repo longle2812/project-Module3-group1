@@ -95,7 +95,7 @@ public class BookServlet extends HttpServlet {
         if (category_id!=null) {
             int cate_id = Integer.parseInt(category_id);
             bookList = bookService.searchByCategory(cate_id);
-        } else if(q == null || q.equals("") || category_id == null){
+        } else if(q == null || q.equals("")){
             bookList = bookService.findAll();
         }else{
             bookList = bookService.searchByName(q);

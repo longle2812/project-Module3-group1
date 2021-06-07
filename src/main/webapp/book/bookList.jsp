@@ -36,6 +36,7 @@
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
 
+
 <div class="limiter">
     <div>
         <%--Alert--%>
@@ -56,8 +57,23 @@
             </div>
         </c:if>
     </div>
+
     <div class="container-table100">
-        <div class="wrap-table100">
+        <div style="margin-top: 20px; display: -webkit-inline-box; margin-left: 200px;">
+            <a class="btn icon-btn btn-primary" href="/books?action=create"
+               style="background-color: #3c4b64; border-color: #3c4b64">
+                <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"
+                ></span>
+                Create new book</a>
+            <form class="form-inline">
+                <input name="q" class="form-control mr-sm-2" type="nameSearch" placeholder="Enter book name"
+                       aria-label="Search" style="width: 300px;margin-left: 360px;">
+                <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        style="color: white; line-height: 12px;">Search
+                </button>
+            </form>
+        </div>
+        <div class="wrap-table100" style="margin-top: 20px">
             <div class="table">
                 <div class="row header">
                     <div class="cell">
@@ -105,10 +121,12 @@
                         </div>
                         <div class="cell" data-title="Status">
                             <c:if test="${book.status == 'new'}">
-                                <span class="label label-default" style="color: white; background-color: #777"> New </span>
+                                <span class="label label-default"
+                                      style="color: white; background-color: #777"> New </span>
                             </c:if>
                             <c:if test="${book.status == 'old'}">
-                                <span class="label label-warning" style="color: white; background-color: #5bc0de"> Old </span>
+                                <span class="label label-warning"
+                                      style="color: white; background-color: #5bc0de"> Old </span>
                             </c:if>
                         </div>
                         <div class="cell" data-title="Description">
@@ -132,8 +150,9 @@
                             </a>
                         </div>
                         <div class="cell">
-                            <button  type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#exampleModal" data-add="${book.getId()}" style="background-color: #6c7ae0">
+                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                    data-target="#exampleModal" data-add="${book.getId()}"
+                                    style="background-color: #6c7ae0">
                                 Add
                             </button>
                         </div>

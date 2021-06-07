@@ -97,16 +97,14 @@ iframe {
 
 .container-table100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 50vh;
   background: #c4d3f6;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
   flex-wrap: wrap;
   padding: 0px 0px;
 }

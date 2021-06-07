@@ -36,7 +36,7 @@
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active"><a class="nav-link" href="?action=userMenu">Profile</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/home?action=userMenu">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
                 <li class="nav-item"><a class="nav-link" href="/shelves">Shelf</a></li>
                 <li class="nav-item"><a class="nav-link" href="/home?action=mainMenu">About</a></li>
@@ -54,11 +54,13 @@
 </header>
 
 <%--Book List--%>
-<jsp:include page="test.jsp">
+<jsp:include page="bookList.jsp">
     <jsp:param name="books" value="${books}" />
     <jsp:param name="categories" value="${categories}" />
     <jsp:param name="shelfList" value="${shelfList}" />
     <jsp:param name="message" value="${message}"/>
+    <jsp:param name="q" value="#{q}"/>
+    <jsp:param name="category_id" value="category_id"/>
 </jsp:include>
 
 

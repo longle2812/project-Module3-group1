@@ -83,14 +83,11 @@ public class PositionServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void shelfMainMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userID = (Integer) request.getSession(false).getAttribute("userID");
         List<Position> positionList = this.positionService.findAllByID(userID);
-
         if (positionList != null) {
             request.setAttribute("positionList" , positionList);
         }
@@ -137,8 +134,6 @@ public class PositionServlet extends HttpServlet {
         }
         requestDispatcher = request.getRequestDispatcher("/position/create.jsp");
         requestDispatcher.forward(request, response);
-
-
     }
 
     private void addNewShelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

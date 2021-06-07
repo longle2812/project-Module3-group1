@@ -1,120 +1,66 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Shelf Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Book list</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet"/>
+    <link href="../css/simpleList.css" rel="stylesheet"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
-<%--Bootstrap--%>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+
+<body id="page-top">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-<%--Nav bar--%>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/home?action=userMenu">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/shelves">Shelf</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/books">Books</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    User Profile
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<%--Create new shelf--%>
-<div>
-    <div class="card" style="width: 18rem;">
-        <img src="img/shelf.png" class="card-img-top" alt="Create new shelf">
-        <div class="card-body">
-            <h5 class="card-title">Book shelf</h5>
-            <p class="card-text">Create your customize book shelf</p>
-            <a href="?action=create" class="btn btn-primary">Create</a>
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-black py-0 px-0"><a class="navbar-brand" href="#"><img id="logo"
+                                                                                                              src="https://i.imgur.com/K7Nwq4V.jpg">
+        &nbsp;&nbsp;&nbsp;Bbookk</a> <span class="v-line"></span>
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"><a class="nav-link" href="/home?action=userMenu">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="/shelves">Shelf</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            </ul>
         </div>
-    </div>
+    </nav>
 </div>
 
-<%--Show all shelf--%>
-<c:forEach items='${requestScope["positionList"]}' var="position">
-    <div style="display: inline-block">
-        <div class="card" style="width: 20rem;">
-            <img src="img/shelf.png" class="card-img-top" alt="Shelf">
-            <div class="card-body">
-                <h5 class="card-title">${position.getName()}</h5>
-                <p class="card-text">${position.getUsing()} / ${position.getCapacity()}</p>
-                <a href="?action=view&shelfID=${position.getId()}" class="btn btn-primary">View</a>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-delete="${position.getId()}">
-                    Delete
-                </button>
-                <a href="?action=edit&shelfID=${position.getId()}" class="btn btn-warning"> Edit </a>
-            </div>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container px-5 px-lg-6 h-100 position-relative">
+        <div class="gx-4 gx-lg-1 h-80 align-items-start text-start text-weight-bold">
         </div>
     </div>
-</c:forEach>
+</header>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Be Careful</strong> Deleted shelf can not be recover!
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Please don't</button>
-                <a id="del-button" class="btn btn-danger" role="button">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    $(document).ready(function() {
-        $('#exampleModal').on('show.bs.modal', function(e) {
-            var deleteid = $(e.relatedTarget).data('delete');
-            $('#del-button').click(function() {
-                window.location.href = '/shelves?action=delete&id='+deleteid;
-                return false;
-            });
-        });
-    });
-</script>
+<%--Book List--%>
+<jsp:include page="shelfList.jsp">
+    <jsp:param name="positionList" value="${positionList}"/>
+    <jsp:param name="shelfList" value="${shelfList}"/>
+    <jsp:param name="message" value="${message}"/>
+</jsp:include>
+<!-- Core theme JS-->
+<script src="../js/mainMenu.js"></script>
 </body>
 </html>
