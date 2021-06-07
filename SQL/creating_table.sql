@@ -62,6 +62,7 @@ values ('Fiction'),
        ('Cultural'),
        ('Self help'),
        ('Non fiction');
+drop table category;
 
 insert into book (name, description, imgURL, status, category_id, publisher)
 values ('The Midnight Library',
