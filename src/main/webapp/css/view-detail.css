@@ -13,7 +13,6 @@ body {
 }
 header, footer, article, nav, div {
     padding: 1em;
-    background: yellowgreen;
 }
 #pageHeader {
     grid-area: header;
@@ -42,12 +41,18 @@ header, footer, article, nav, div {
 }
 .details{
     font-size:12px;
-    border-bottom: 1px solid #D8D8D8;
-    border-top: 1px solid #D8D8D8;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 
 }
 .infoBoxRowItem{
     color: #382110;
     font-weight: bold;
     margin: 1px 0px;
+}
+
+body{
+    background-image: url(https://mondaycareer.com/wp-content/uploads/2020/11/background-%C4%91%E1%BA%B9p-1-1024x768.jpg);
+    height: 100vh;
+    background-size: cover;
 }
