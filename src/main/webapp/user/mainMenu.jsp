@@ -34,7 +34,7 @@
                 <li class="nav-item active"><a class="nav-link" href="?action=userMenu">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
                 <li class="nav-item"><a class="nav-link" href="/shelves">Shelf</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/home?action=mainMenu">About</a></li>
             </ul>
         </div>
     </nav>

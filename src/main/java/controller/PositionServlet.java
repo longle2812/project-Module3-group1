@@ -37,10 +37,20 @@ public class PositionServlet extends HttpServlet {
             case "deleteBook":
                 deleteBook(request, response);
                 break;
+            case "viewBook":
+                viewBookDetail(request, response);
             default:
                 shelfMainMenu(request, response);
                 break;
         }
+    }
+
+    private void viewBookDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bookId = Integer.parseInt(request.getParameter("id"));
+        Book book = bookService.findByID(bookId);
+        request.setAttribute("book", book);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/book/view-detail.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

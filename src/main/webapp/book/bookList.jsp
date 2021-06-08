@@ -9,7 +9,7 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+<%--    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">--%>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
@@ -26,6 +26,7 @@
     <!--===============================================================================================-->
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -65,6 +66,17 @@
                 <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"
                 ></span>
                 Create new book</a>
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter by Categories
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <c:forEach items="${categories.entrySet()}" var="category">
+                        <li><a class="dropdown-item"
+                               href="/books?action=cat_search&category_id=${category.getKey()}&userId=${userID}">${category.getValue()}</a></li>
+                    </c:forEach>
+                </ul>
+            </div>
             <form class="form-inline">
                 <input name="q" class="form-control mr-sm-2" type="nameSearch" placeholder="Enter book name"
                        aria-label="Search" style="width: 300px;margin-left: 360px;">
@@ -111,10 +123,10 @@
                 <c:forEach items='${books}' var="book">
                     <div class="row">
                         <div class="cell" data-title="ID">
-                                ${book.id}
+                               ${book.id}
                         </div>
                         <div class="cell" data-title="Name">
-                                ${book.name}
+                            <a href="?action=view&book_id=${book.id}">${book.name}</a>
                         </div>
                         <div class="cell" data-title="Image">
                             <img src="${book.imgURL}" alt="book image" style="width: 100px;height: 100px">

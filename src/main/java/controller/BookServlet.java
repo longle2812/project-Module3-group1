@@ -51,7 +51,7 @@ public class BookServlet extends HttpServlet {
     }
 
     private void viewBookDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userID = Integer.parseInt(request.getParameter("userId"));
+        int userID = (Integer) request.getSession(false).getAttribute("userID");
         int bookId = Integer.parseInt(request.getParameter("book_id"));
         Book book = bookService.findByID(bookId);
         RequestDispatcher requestDispatcher;

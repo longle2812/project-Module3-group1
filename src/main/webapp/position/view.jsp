@@ -30,7 +30,7 @@
     </style>
 </head>
 <body>
-<h3> </h3>
+<a href="/shelves" style="text-decoration: none; margin: 10px"> <span> Back to shelf list</span> </a>
 <table>
     <tr>
         <th>ID</th>
@@ -45,7 +45,7 @@
     <c:forEach items='${books}' var="book">
         <tr>
             <td>${book.getId()}</td>
-            <td><a href="/books?action=view&id=${book.getId()}">${book.getName()}</a></td>
+            <td><a href="/books?action=view&book_id=${book.getId()}">${book.getName()}</a></td>
             <td>${book.getDescription()}</td>
             <td><img src="${book.getImgURL()}" alt="book image"></td>
             <td>${book.getStatus()}</td>
