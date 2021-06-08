@@ -40,6 +40,7 @@
                 <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
                 <li class="nav-item"><a class="nav-link" href="/shelves">Shelf</a></li>
                 <li class="nav-item"><a class="nav-link" href="/home?action=mainMenu">About</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/home">Sign Out</a></li>
             </ul>
         </div>
     </nav>
