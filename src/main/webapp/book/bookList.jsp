@@ -141,7 +141,11 @@
                                       style="color: white; background-color: #5bc0de"> Old </span>
                             </c:if>
                         </div>
-                        <div class="cell" data-title="Description">
+                        <div class="cell" data-title="Description" style="    overflow: auto;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;">
                                 ${book.description}
                         </div>
                         <div class="cell" data-title="Category">
